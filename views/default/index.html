@@ -3,9 +3,56 @@
 {{block head}}
 {{end}}
 
-<div class="main_content">
+<div class="main_content container">
 
-  <!-- Here goes your main HTML code. -->
+    <h2>Networth for {{= user['name']['first'] +" "+ user['name']['last'] }}</h2>
+
+    <p>
+        <b>Date:</b>
+        {{= date }}
+    </p>
+
+    <div id="pie"></div>
+
+    <p>
+        <b>Assets:</b>
+        <span id="asset">{{= asset }}</span>
+    </p>
+
+    <p>
+        <b>Liabilities:</b>
+        <span id="liability">{{= liability }}</span>
+    </p>
+
+    <p>
+        <b>Networth:</b>
+        {{= networth }}
+    </p>
+
 
 </div>
 
+{{block bottomjs}}
+<script>
+var data = [
+    { label: "Assets", value: 9090, color: "#00aa00" },
+    { label: "Liabilities", value: 1636, color: "#aa0000"},
+];
+
+var pie = new d3pie("pie", {
+    header: {
+		title: {
+			text: "Comparing assets and liabilities"
+		}
+	},
+    data: {
+        content: data
+    }
+});
+
+$(function() {
+
+    //
+});
+</script>
+{{end}}

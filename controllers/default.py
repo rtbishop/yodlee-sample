@@ -8,6 +8,9 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
+from credentials import COBRAND_LOGIN, COBRAND_PASSWORD, USERNAME, PASSWORD
+
+yodlee = Yodlee(COBRAND_LOGIN, COBRAND_PASSWORD, USERNAME, PASSWORD)
 
 def index():
     """
@@ -17,8 +20,11 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+
+    user = yodlee.getUser()
+    networth = yodlee.getNetworth()
+
+    return dict(user=user, date=networth['date'], asset=networth['asset']['amount'], liability=networth['liability']['amount'], networth=networth['networth']['amount'])
 
 
 def user():
